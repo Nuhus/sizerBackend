@@ -1,5 +1,5 @@
 const mongo = require('mongodb')
-const url = 'mongodb://localhost:27017'
+const url = 'mongodb://Sizer:Sizer57563@ac-nykjus7-shard-00-00.artwely.mongodb.net:27017,ac-nykjus7-shard-00-01.artwely.mongodb.net:27017,ac-nykjus7-shard-00-02.artwely.mongodb.net:27017/?ssl=true&replicaSet=atlas-67vtu3-shard-0&authSource=admin&retryWrites=true&w=majority'
 getAll = (req, res) =>{
    var query
     mongo.MongoClient.connect(url, (err, connection)=>{
