@@ -23,7 +23,7 @@ app.post("/createCustomer", (req, res)=>{
 app.post("/LogIN", (req, res)=>{
     controls.LogIn(req, res)
 })
-const portNumber = process.env.portNumber || 8082
+const portNumber = process.env.PORT || 8082
 app.listen(portNumber,()=>{
     console.log(`listening at port ${portNumber}`)
 })
