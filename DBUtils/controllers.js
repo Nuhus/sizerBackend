@@ -174,13 +174,22 @@ LogIn = (req, res) =>{
                                         console.warn(error)
                                     }
                                     else{
-                                        res.status(200).json({
-                                            message:"login successful",
-                                            status:200,
-                                            userEmail:req.body.email,
-                                            userDetails:result,
-                                            customers:cresult
+                                        db.collection("users").find({}).toArray((error, uresult)=>{
+                                            if(error){
+                                                console.warn(error)
+                                            }
+                                            else{
+                                                res.status(200).json({
+                                                    message:"login successful",
+                                                    status:200,
+                                                    userEmail:req.body.email,
+                                                    userDetails:result,
+                                                    customers:cresult,
+                                                    allUsers:uresult
+                                                })
+                                            }
                                         })
+                                        
                                     }
                                 })
                             }
