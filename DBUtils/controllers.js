@@ -19,11 +19,27 @@ getAll = (req, res) =>{
                 if(err){
                     console.warn(err)
                 }else{
-                    console.log(result)
+                    //console.log(result)
+                    if(req.body.userDetail.userType=="admin"){
+                        db.collection("users").find({}).toArray((error, uresult)=>{
+                            if(error){
+                                console.warn(error)
+                            }
+                            else{
+                                res.status(200).json({
+                                    message:result,
+                                    allUsers:uresult
+                                   })
+                                   connection.close()
+                            }
+                        })
+                    }
+                    else{
                     res.status(200).json({
                         message:result
                        })
                        connection.close()
+                    }
                 }
             })
         }
@@ -185,7 +201,7 @@ LogIn = (req, res) =>{
                                                     userEmail:req.body.email,
                                                     userDetails:result,
                                                     customers:cresult,
-                                                    allUsers:uresult
+                                                    allUsers:cresult
                                                 })
                                             }
                                         })
