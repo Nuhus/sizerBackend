@@ -275,7 +275,7 @@ tendUser = (req, res) =>{
         }else{
             const db = connection.db("Sizer")
             db.collection("users")
-            updateOne({phone:req.body.phone},{$set:{approval:req.body.action}},(err, result)=>{
+            .updateOne({phone:req.body.phone},{$set:{approval:req.body.action}},(err, result)=>{
                 if(err){
                     console.log(err)
                 }
