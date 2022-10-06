@@ -201,7 +201,7 @@ LogIn = (req, res) =>{
                                                     userEmail:req.body.email,
                                                     userDetails:result,
                                                     customers:cresult,
-                                                    allUsers:cresult
+                                                    allUsers:uresult
                                                 })
                                             }
                                         })
