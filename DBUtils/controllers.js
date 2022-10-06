@@ -268,6 +268,27 @@ createCustomer = (req, res) =>{
         }
 })
 }
+tendUser = (req, res) =>{
+    mongo.MongoClient.connect(url, (err, connection)=>{
+        if(err){
+            console.log(err)
+        }else{
+            const db = connection.db("Sizer")
+            db.collection("users")
+            updateOne({phone:req.body.phone},{$set:{approval:req.body.action}},(err, result)=>{
+                if(err){
+                    console.log(err)
+                }
+                else{
+                    res.status(200).json({
+                        message:"successful"
+                    })
+                }
+                
+               })
+        }
+})
+}
 
 module.exports = {
     getAll,
@@ -275,5 +296,6 @@ module.exports = {
     signUp,
     LogIn,
     createCustomer,
-    updateMeasurement
+    updateMeasurement,
+    tendUser
 }

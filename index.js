@@ -11,6 +11,9 @@ app.post("/getall", (req, res)=>{
 app.post("/saveMeasurement", (req, res)=>{
     controls.saveMeasurement(req, res)
 })
+app.post("/tendUser", (req, res)=>{
+    controls.tendUser(req, res)
+})
 app.post("/updateMeasurement", (req, res)=>{
     controls.saveMeasurement(req, res)
 })
