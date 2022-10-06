@@ -170,46 +170,53 @@ LogIn = (req, res) =>{
         }else{
             const db = connection.db("Sizer")
             db.collection("users")
-            .countDocuments({$and:[{email:req.body.email}, {password:req.body.password}]}, (error, result)=>{
+            .findOne({email:req.body.email},(error, result)=>{
                 if(error){
                     res.status(500).json({
                         message:"server error :" + error,
                         status:500
                     })
                 }
-                if(result > 0){
-                    db.collection("users")
-                    .findOne({email:req.body.email},(error, result)=>{
-                        if(error){
-                            console.warn(error)
+                if(result != null){
+                    if(result.password != req.body.password){
+                        res.status(203).json({
+                            message:"password is not correct",
+                            status:203
+                        })
+                    }
+                    if(result.approval != "approved"){
+                        res.status(203).json({
+                            message:"inactive user",
+                            status:203
+                        })
+                    }
+                    if(result.password == req.body.password && result.approval == "approved"){
+                        if(result.userType == "admin"){
+                            db.collection("customers").find({}).toArray((error, cresult)=>{
+                                if(error){
+                                    console.warn(error)
+                                }
+                                else{
+                                    db.collection("users").find({}).toArray((error, uresult)=>{
+                                        if(error){
+                                            console.warn(error)
+                                        }
+                                        else{
+                                            res.status(200).json({
+                                                message:"login successful",
+                                                status:200,
+                                                userEmail:req.body.email,
+                                                userDetails:result,
+                                                customers:cresult,
+                                                allUsers:uresult
+                                            })
+                                        }
+                                    })
+                                    
+                                }
+                            })
                         }
                         else{
-                            if(result.userType == "admin"){
-                                db.collection("customers").find({}).toArray((error, cresult)=>{
-                                    if(error){
-                                        console.warn(error)
-                                    }
-                                    else{
-                                        db.collection("users").find({}).toArray((error, uresult)=>{
-                                            if(error){
-                                                console.warn(error)
-                                            }
-                                            else{
-                                                res.status(200).json({
-                                                    message:"login successful",
-                                                    status:200,
-                                                    userEmail:req.body.email,
-                                                    userDetails:result,
-                                                    customers:cresult,
-                                                    allUsers:uresult
-                                                })
-                                            }
-                                        })
-                                        
-                                    }
-                                })
-                            }
-                            else{
                             res.status(200).json({
                                 message:"login successful",
                                 status:200,
@@ -218,11 +225,10 @@ LogIn = (req, res) =>{
                             })
                         }
                     }
-                    })
-                    
+                   
                 }else{
                     res.status(203).json({
-                        message:"email or password invalid",
+                        message:"email invalid",
                         status:203
                     })
                 }
