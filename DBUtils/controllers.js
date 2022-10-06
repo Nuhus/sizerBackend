@@ -281,7 +281,8 @@ tendUser = (req, res) =>{
                 }
                 else{
                     res.status(200).json({
-                        message:"successful"
+                        message:"successful",
+                        status:200
                     })
                 }
                 
