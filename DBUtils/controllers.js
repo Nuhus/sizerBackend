@@ -326,5 +326,6 @@ module.exports = {
     LogIn,
     createCustomer,
     updateMeasurement,
-    tendUser
+    tendUser,
+deleteUser
 }
