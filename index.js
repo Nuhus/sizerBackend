@@ -20,6 +20,9 @@ app.post("/updateMeasurement", (req, res)=>{
 app.post("/signUp", (req, res)=>{
     controls.signUp(req, res)
 })
+app.post("/deleteUser", (req, res)=>{
+    controls.deleteUser(req, res)
+})
 app.post("/createCustomer", (req, res)=>{
     controls.createCustomer(req, res)
 })

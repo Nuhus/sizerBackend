@@ -296,6 +296,28 @@ tendUser = (req, res) =>{
         }
 })
 }
+deleteUser = (req, res) =>{
+    mongo.MongoClient.connect(url, (err, connection)=>{
+        if(err){
+            console.log(err)
+        }else{
+            const db = connection.db("Sizer")
+            db.collection("users")
+            .deleteOne({phone:req.body.phone},(err, result)=>{
+                if(err){
+                    console.log(err)
+                }
+                else{
+                    res.status(200).json({
+                        message:"deleted successfully",
+                        status:200
+                    })
+                }
+                
+               })
+        }
+})
+}
 
 module.exports = {
     getAll,
