@@ -170,7 +170,7 @@ LogIn = (req, res) =>{
         }else{
             const db = connection.db("Sizer")
             db.collection("users")
-            .findOne({email:req.body.email},(error, result)=>{
+            .findOne({$or:[{email:req.body.email}, {phone:req.body.email}]},(error, result)=>{
                 if(error){
                     res.status(500).json({
                         message:"server error :" + error,
