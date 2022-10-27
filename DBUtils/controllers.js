@@ -328,9 +328,5 @@ module.exports = {
     createCustomer,
     updateMeasurement,
     tendUser,
-<<<<<<< HEAD
     deleteUser
-=======
-deleteUser
->>>>>>> d4855bba576cbe1a267864c78d375656a277b940
 }
