@@ -228,7 +228,7 @@ LogIn = (req, res) =>{
                    
                 }else{
                     res.status(203).json({
-                        message:"email invalid",
+                        message:"email or phone number invalid",
                         status:203
                     })
                 }
@@ -328,5 +328,9 @@ module.exports = {
     createCustomer,
     updateMeasurement,
     tendUser,
+<<<<<<< HEAD
     deleteUser
+=======
+deleteUser
+>>>>>>> d4855bba576cbe1a267864c78d375656a277b940
 }
