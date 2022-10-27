@@ -304,6 +304,7 @@ deleteUser = (req, res) =>{
             const db = connection.db("Sizer")
             db.collection("users")
             .deleteOne({phone:req.body.phone},(err, result)=>{
+                console.warn(req.body.phone)
                 if(err){
                     console.log(err)
                 }
@@ -326,5 +327,6 @@ module.exports = {
     LogIn,
     createCustomer,
     updateMeasurement,
-    tendUser
+    tendUser,
+    deleteUser
 }
